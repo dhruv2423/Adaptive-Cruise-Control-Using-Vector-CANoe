@@ -1,0 +1,30 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  int engine_rpm; 
+}
+on message FVSpeed
+{
+  engine_rpm = this.ForwardVehicleSpeed;
+}
+on message Accelerator
+{ 
+  if(this.AcceleratorCommand==1)
+  {
+  setSignal(Current_RPM,engine_rpm);
+  @sysvar::CruiseCSystems::ourcar_rpm=engine_rpm;
+  }
+}
+on message brakemessage
+{ 
+  if(this.brakeval==1)
+  {
+  setSignal(Current_RPM,engine_rpm);
+  @sysvar::CruiseCSystems::ourcar_rpm=engine_rpm;
+  }
+}

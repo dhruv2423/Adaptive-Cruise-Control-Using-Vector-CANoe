@@ -1,0 +1,38 @@
+/*@!Encoding:1252*/
+includes
+{
+
+}
+
+variables
+{
+  int accelerate;
+  int brake;
+  int current_rpm;
+}
+on start
+{
+  accelerate = 0;
+  brake = 0;
+}
+on message c_rpm
+{
+  current_rpm = this.Current_RPM;
+}
+on message FVSpeed
+{
+  write("acctest");
+  if(this.ForwardVehicleSpeed<current_rpm)
+  {
+    write("acctest1");
+    setSignal(AcceleratorCommand,0);
+    setSignal(brakeval,1);
+  }
+  else
+  {
+    write("acctest2");
+    setSignal(AcceleratorCommand,1);
+    setSignal(brakeval,0);
+  }
+}
+

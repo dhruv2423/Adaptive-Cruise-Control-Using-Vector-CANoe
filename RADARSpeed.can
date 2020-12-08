@@ -1,0 +1,25 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  int fvspeedinc = 100;
+}
+
+on key 'i'
+{
+  fvspeedinc = fvspeedinc+20;
+  setSignal(ForwardVehicleSpeed,fvspeedinc);
+  setSignal(Current_RPM,fvspeedinc);
+  @sysvar::CruiseCSystems::FVRPM=fvspeedinc;
+}
+on key 'd'
+{
+  fvspeedinc = fvspeedinc-20;
+  setSignal(ForwardVehicleSpeed,fvspeedinc);
+  setSignal(Current_RPM,fvspeedinc);
+  @sysvar::CruiseCSystems::FVRPM=fvspeedinc;
+}
